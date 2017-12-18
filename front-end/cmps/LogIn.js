@@ -25,7 +25,9 @@ export default {
                    console.log('log in res:', res)
                    EventBusService.$emit('userLoggedIn', res)
                    this.$router.push('/')
-                })
+                }).catch(err => {
+                    console.log(err)
+                });
         }
     }
 }

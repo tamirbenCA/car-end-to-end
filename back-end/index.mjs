@@ -76,12 +76,13 @@ app.get('/', (req, res) => res.send('Hello World!'))
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
 
-
 app.get(`${USER_URL}/login`, (req, res) => {
     //user is an object  - has an email & name
-    UserService.checkLogIn(req.user)
-        .then(user => {
-            res.json(true)
+    console.log('row 81:', req.body)
+    UserService.checkLogIn(req.body)
+        .then(name => {
+            console.log('index mjs, login:', name)
+            res.json(name)
         })
         .catch(err => res.status(500).send(err.message))
 })

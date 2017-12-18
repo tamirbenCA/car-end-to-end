@@ -23,9 +23,10 @@ export default {
         submit() {
             AuthService.logIn(this.user)
                 .then(res => {
-                   console.log('log in res:', res)
                    EventBusService.$emit('userLoggedIn', res)
                    this.$router.push('/')
+                }).catch(err => {
+                    console.log(err)
                 })
         }
     }

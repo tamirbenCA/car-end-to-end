@@ -5,7 +5,7 @@ var loggedinUser = null;
 function checkLogIn(userInfo) { 
     return new Promise((resolve, reject) => {
         var user = getUser(userInfo)
-        resolve(user);
+        resolve(user.name);
         // if (getUser(userInfo)) {
         //     loggedinUser = true;
         //     resolve({loggedinUser});
