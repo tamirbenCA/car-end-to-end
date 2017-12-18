@@ -21,7 +21,7 @@ export default {
             },
     methods: {
         submit() {
-            AuthService.logIn(this.user)
+            AuthService.signUp(this.user)
                 .then(res => {
                    EventBusService.$emit('userLoggedIn', res)
                    this.$router.push('/')

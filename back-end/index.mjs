@@ -76,22 +76,19 @@ app.get('/', (req, res) => res.send('Hello World!'))
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
 
-app.get(`${USER_URL}/login`, (req, res) => {
-    console.log('req back80',req.body)
+app.post(`${USER_URL}/login`, (req, res) => {
     //user is an object  - has an email & name
-    console.log('row 81:', req.body)
     UserService.checkLogIn(req.body)
         .then(name => {
-            console.log('index mjs, login:', name)
             res.json(name)
         })
         .catch(err => res.status(500).send(err.message))
 })
 
 
-app.post(`${USER_URL}`, (req, res) => {
+app.post(`${USER_URL}/signup`, (req, res) => {
     UserService
-        .signup(req.user)
+        .signup(req.body)
         .then(user => res.json())
         .catch(err => res.status(500).send('Could not add user'))
 })

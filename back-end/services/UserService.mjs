@@ -4,8 +4,11 @@ var loggedinUser = null;
 
 function checkLogIn(userInfo) {
     return new Promise((resolve, reject) => {
-        var user = getUser(userInfo)
-        resolve(user.name);
+         getUser(userInfo)
+        .then(user => {
+            // console.log('row 9', user)
+            resolve(user.name);
+        } )
         // if (getUser(userInfo)) {
         //     loggedinUser = true;
         //     resolve({loggedinUser});
@@ -24,6 +27,7 @@ function getUsers() {
                 reject(err);
             } else {
                 var users = JSON.parse(strUsers)
+                // console.log('getusers:', users)
                 resolve(users)
             }
         })
@@ -34,11 +38,12 @@ function getUsers() {
 
 function getUser(userInfo) {
     return getUsers().then(users => {
-        const user = users.find((user) => {
-            if (user.email === userInfo.email && user.password === userInfo.password)
+        let validUser = users.find(user => {
+            if (user.email === userInfo.email && user.password === userInfo.password) {
                 return user;
-            else throw new Error('User not Found');
+            }
         });
+        return Promise.resolve(validUser)
     })
 }
 
@@ -47,9 +52,14 @@ function getUser(userInfo) {
 function signup(user) {
     return new Promise(resolve => {
         return getUsers().then(users => {
+            user.id = _getNextId(users);
+            user.isAdmin = false;
+            user.favCarIds = [];
             users.push(user)
+            _saveUsers(users).then(_ => {
+                resolve('User added successfuly');
+            })
         })
-        resolve('User added successfuly');
     });
 }
 
@@ -67,7 +77,7 @@ function updateUser(user) {
     })
 }
 
-function _saveCars(users) {
+function _saveUsers(users) {
     return new Promise((resolve, reject) => {
         var strUsers = JSON.stringify(users)
         fs.writeFile(FILE_NAME, strUsers, 'utf8', (err, data) => {
@@ -77,15 +87,15 @@ function _saveCars(users) {
     });
 }
 
+function _getNextId(users) {
+    var maxId = users.reduce((acc, user) => {
+        return (user.id > acc) ? user.id : acc
+    }, 0)
+    return maxId + 1;
+}
 
-function _getUserIdx(userId) {
-    return getUsers().then(users => {
-        const user = users.find((user) => {
-            if (user.id === userId)
-                return user.favCarIds;
-            else throw new Error('User not Found');
-        });
-    })
+function _getUserIdx(users, userId) {
+    return users.findIndex(user => user.id === userId)
 }
 
 export default {
