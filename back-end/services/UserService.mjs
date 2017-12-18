@@ -1,8 +1,8 @@
 const FILE_NAME = 'users.json';
 import fs from 'fs';
-var loggedinUser = null; 
+var loggedinUser = null;
 
-function checkLogIn(userInfo) { 
+function checkLogIn(userInfo) {
     return new Promise((resolve, reject) => {
          getUser(userInfo)
         .then(user => {
@@ -14,9 +14,9 @@ function checkLogIn(userInfo) {
         //     resolve({loggedinUser});
         // } 
         // else {
-            // reject(error: 'Email/Password not valid')
-            // });
-        
+        // reject(error: 'Email/Password not valid')
+        // });
+
     });
 }
 
@@ -102,7 +102,8 @@ export default {
     checkLogIn,
     getUsers,
     getUser,
-    signup
+    signup,
+    _getUserIdx
 
 }
 

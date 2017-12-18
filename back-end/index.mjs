@@ -94,17 +94,23 @@ app.post(`${USER_URL}/signup`, (req, res) => {
 })
 
 
-app.put(`${USER_URL}/:userId/toggle-like/:carId `, (req, res) => {
-    const carId = req.params.carId;
-    const user = req.body;
-    UserService
-        .updateUser(user)
-        .then(user => res.json(user))
-        .catch(err => res.status(500).send('Could not add car'))
+// app.put(`${USER_URL}/:userId/toggle-like/:carId `, (req, res) => {
+//     const carId = req.params.carId;
+//     const user = req.body;
+//     UserService
+//         .updateUser(user)
+//         .then(user => res.json(user))
+//         .catch(err => res.status(500).send('Could not add car'))
+// })
+
+
+app.get(`${USER_URL}/:userId`, (req, res) => {
+    UserService._getUserIdx(req.body)
+        .then(data => {
+            res.json(data)
+        })
+        .catch(err => res.status(500).send(err.message))
 })
-
-
-
 
 
 

@@ -8,27 +8,33 @@ var cars = [
         id: 98,
         model: 'Subaru',
         price: 323
-    }    
+    }
 ]
 
 const CAR_URL = 'http://localhost:3000/data/car';
 
 function emptyCar() {
-    return {name: '', price: 0}
+    return { name: '', price: 0 }
 }
 
 function _getNextId() {
-    var maxId = cars.reduce((acc, car)=>{
-        return (car.id > acc)? car.id : acc
+    var maxId = cars.reduce((acc, car) => {
+        return (car.id > acc) ? car.id : acc
     }, 0);
     return maxId + 1;
-} 
+}
 
 
 function getCars() {
     return axios
-            .get(CAR_URL)
-            .then(res => res.data)
+        .get(CAR_URL)
+        .then(res => res.data)
+}
+
+function getLikedCars(userId) {
+    return axios
+        .get(CAR_URL+'/' + userId, userId)
+        .then(res =>  res)
 }
 
 function saveCar(car) {
@@ -43,7 +49,7 @@ function saveCar(car) {
     //         car.id = _getNextId();
     //         cars.push(car);
     //     }
-       
+
     //     resolve(car)
     //     // reject()
     // });
@@ -56,10 +62,10 @@ function deleteCar(carId) {
 
 function getCarById(carId) {
     return axios
-    .get(_getCarUrl(carId))
-    .then(res => res.data)
-    
-    
+        .get(_getCarUrl(carId))
+        .then(res => res.data)
+
+
 }
 
 function _getCarUrl(carId) {
