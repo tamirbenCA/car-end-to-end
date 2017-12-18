@@ -64,24 +64,34 @@ app.get('/', (req, res) => res.send('Hello World!'))
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
 
+const USER_URL = '/user';
 
-app.get(`${CAR_URL}`, (req, res) => {
+app.get(`${USER_URL}`, (req, res) => {
     //user is an object  - has an email & name
-    UserService.signin(user)
+    UserService.checkLogIn(user)
         .then(user => {
-            res.json(user)
+            res.json(true)
         })
         .catch(err => res.status(500).send(err.message))
 })
 
-app.post(CAR_URL, (req, res) => {
+
+app.post(`${USER_URL}`, (req, res) => {
     UserService
         .signup(user)
-        .then(user => res.json(user))
-        .catch(err => res.status(500).send('Could not add car'))
+        .then(user => res.json())
+        .catch(err => res.status(500).send('Could not add user'))
 })
 
 
+app.put(`${CAR_URL}/:userId/toggle-like/:carId `, (req, res) => {
+    const carId = req.params.carId;
+    const car = req.body;
+    CarService
+        .updateCar(car)
+        .then(car => res.json(car))
+        .catch(err => res.status(500).send('Could not add car'))
+})
 
 
 

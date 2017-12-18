@@ -11,13 +11,15 @@
         "name": "ben",
         "email": "ben@ben.com",
         "password": "ben123456",
-        "isAdmin": "false"
+        "isAdmin": "false",
+        "favCarIds":[]
     },
     {
         "id": 3,
         "name": "may",
         "email": "may@may.com",
         "password": "may123456",
-        "isAdmin": "false"
+        "isAdmin": "false",
+        "favCarIds":[]
     }
 ]
