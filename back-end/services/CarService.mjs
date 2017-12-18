@@ -74,7 +74,8 @@ export default {
     getById,
     deleteCar,
     updateCar,
-    addCar
+    addCar,
+    deleteCars
 }
 
 // var c = generateCars()
