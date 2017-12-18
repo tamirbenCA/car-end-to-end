@@ -1,10 +1,17 @@
-const USER_URL = 'http://localhost:3000/user';
+const SERVER_USER_URL = 'http://localhost:3000/user';
 
 
 function logIn(user) {
-    return axios.get(`${USER_URL}/login`, user)
+    // console.log('row 5:', user)
+    return axios.post(`${SERVER_USER_URL}/login`, user)
         .then(res => {
-            console.log('authservice, res:', res)
+            return res.data
+        })
+}
+
+function signUp(user) {
+    return axios.post(`${SERVER_USER_URL}/signup`, user)
+        .then(res => {
             res.data
         })
 }

@@ -76,9 +76,8 @@ app.get('/', (req, res) => res.send('Hello World!'))
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
 
-app.get(`${USER_URL}/login`, (req, res) => {
+app.post(`${USER_URL}/login`, (req, res) => {
     //user is an object  - has an email & name
-    console.log('row 81:', req.body)
     UserService.checkLogIn(req.body)
         .then(name => {
             console.log('index mjs, login:', name)
@@ -88,9 +87,9 @@ app.get(`${USER_URL}/login`, (req, res) => {
 })
 
 
-app.post(`${USER_URL}`, (req, res) => {
+app.post(`${USER_URL}/signup`, (req, res) => {
     UserService
-        .signup(req.user)
+        .signup(req.body)
         .then(user => res.json())
         .catch(err => res.status(500).send('Could not add user'))
 })

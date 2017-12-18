@@ -21,5 +21,13 @@
         "password": "may123456",
         "isAdmin": "false",
         "favCarIds":[]
+    },
+    {
+        "id": 4,
+        "name": "1",
+        "email": "1",
+        "password": "1",
+        "isAdmin": "false",
+        "favCarIds":[]
     }
 ]

@@ -4,8 +4,11 @@ var loggedinUser = null;
 
 function checkLogIn(userInfo) { 
     return new Promise((resolve, reject) => {
-        var user = getUser(userInfo)
-        resolve(user.name);
+         getUser(userInfo)
+        .then(user => {
+            // console.log('row 9', user)
+            resolve(user.name);
+        } )
         // if (getUser(userInfo)) {
         //     loggedinUser = true;
         //     resolve({loggedinUser});
@@ -24,6 +27,7 @@ function getUsers() {
                 reject(err);
             } else {
                 var users = JSON.parse(strUsers)
+                // console.log('getusers:', users)
                 resolve(users)
             }
         })
@@ -34,11 +38,13 @@ function getUsers() {
 
 function getUser(userInfo) {
     return getUsers().then(users => {
-        const user = users.find((user) => {
-            if (user.email === userInfo.email && user.password === userInfo.password)
+        console.log('row 38:', users)
+        let validUser = users.find(user => {
+            if (user.email === userInfo.email && user.password === userInfo.password) {
                 return user;
-            else throw new Error('User not Found');
+            }
         });
+        return Promise.resolve(validUser)
     })
 }
 
