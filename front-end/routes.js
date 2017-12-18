@@ -1,6 +1,7 @@
 import HomePage from './pages/HomePage.js'
 import CarDetailsPage from './pages/CarDetailsPage.js'
 import CarEditPage from './pages/CarEditPage.js'
+import LogIn from './cmps/LogIn.js'
 
 const routes = [
     {
@@ -19,7 +20,11 @@ const routes = [
     {
         path: '/car/:carId/edit',
         component: CarEditPage
-    }  
+    },
+    {
+        path: '/user/login',
+        component: LogIn
+    }
 ];
 
 export default routes;

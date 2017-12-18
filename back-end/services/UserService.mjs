@@ -33,9 +33,9 @@ function getUsers() {
 function getUser(userInfo) {
     return getUsers().then(users => {
         const user = users.find((user) => {
-            if (user.name === userInfo.name && user.email === userInfo.email)
+            if (user.email === userInfo.email && user.password === userInfo.password)
                 return user;
-            else throw new Error('Car not Found');
+            else throw new Error('User not Found');
         });
     })
 }

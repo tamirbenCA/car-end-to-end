@@ -6,6 +6,9 @@ import bodyParser from 'body-parser'
 
 import cors from 'express-cors'
 
+const CAR_URL = '/data/car';
+const USER_URL = '/user';
+
 const app = express()
 app.use(cors({
     allowedOrigins: [
@@ -14,7 +17,6 @@ app.use(cors({
 }))
 app.use(bodyParser());
 
-const CAR_URL = '/data/car';
 
 app.get(CAR_URL, (req, res) => {
     CarService.getCars()
@@ -64,11 +66,10 @@ app.get('/', (req, res) => res.send('Hello World!'))
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
 
-const USER_URL = '/user';
 
-app.get(`${USER_URL}`, (req, res) => {
+app.get(`${USER_URL}/login`, (req, res) => {
     //user is an object  - has an email & name
-    UserService.checkLogIn(user)
+    UserService.checkLogIn(req.user)
         .then(user => {
             res.json(true)
         })
