@@ -1,9 +1,8 @@
 import EventBusService,{SHOW_MSG} from '../services/EventBusService.js'
 import CarService from '../services/CarService.js'
-// import UserFeedbackMixin from '../mixins/UserFeedbackMixin.js'
+import StorageService from '../services/StorageService.js'
 
 export default {
-    // mixins: [UserFeedbackMixin],
     template: `
     <section>
     <h1>Cars R Us</h1>
@@ -18,12 +17,12 @@ export default {
                 <td>{{car.price}}</td>
                 <td><router-link :to="'/car/' + car.id">Details</router-link> </td>
             
-                <td> <button @click="deleteCar(car.id)">x</button>
-                                <router-link :to="'/car/' + car.id + '/edit'">Edit</router-link>
-            </td>
-        </tr>
+                <td v-if="isAdmin"> <button @click="deleteCar(car.id)">x</button>
+                    <router-link :to="'/car/' + car.id + '/edit'">Edit</router-link>
+                </td>
+            </tr>
         </table>
-    <router-link to="/car/create">Add</router-link>
+    <router-link to="/car/create" v-if="isAdmin">Add</router-link>
 </section>    `,
     data() {
         return {
@@ -57,7 +56,13 @@ export default {
                 EventBusService.$emit(SHOW_MSG, userMsg)
                 
             })
-        },     
+        }     
+    },
+    computed: {
+        isAdmin() {
+            console.log(StorageService.loadFromStorage('admin'))
+            return StorageService.loadFromStorage('admin')
+        }
     }
     
 }

@@ -7,7 +7,7 @@ function checkLogIn(userInfo) {
          getUser(userInfo)
         .then(user => {
             // console.log('row 9', user)
-            resolve(user.name);
+            resolve(user);
         } )
         // if (getUser(userInfo)) {
         //     loggedinUser = true;

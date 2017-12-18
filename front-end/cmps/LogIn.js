@@ -1,5 +1,6 @@
 import AuthService from '../services/AuthService.js'
 import EventBusService from '../services/EventBusService.js'
+import StorageService from '../services/StorageService.js'
 
 export default {
     template: `
@@ -22,8 +23,13 @@ export default {
         submit() {
             AuthService.logIn(this.user)
                 .then(res => {
-                   EventBusService.$emit('userLoggedIn', res)
-                   this.$router.push('/')
+                    if (res) {
+                        console.log(res)
+                        EventBusService.$emit('userLoggedIn', res)
+                        this.$router.push('/')
+                        StorageService.saveToStorage('user', res.name)
+                        if (res.isAdmin === "true")   StorageService.saveToStorage('admin', "true")
+                    }
                 }).catch(err => {
                     console.log(err)
                 });
