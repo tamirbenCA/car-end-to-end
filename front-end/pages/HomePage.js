@@ -25,13 +25,10 @@ export default {
                     <router-link :to="'/car/' + car.id + '/edit'">Edit</router-link>
                 </td>
             </tr>
-<<<<<<< HEAD
-=======
             <div v-if="user" > 
                 <button @click="toggleLikes(user)"> Show my likes </button>
             </div>
             <show-likes :likes=likes></show-likes>
->>>>>>> c49bf3233aeaa7688c47841b39c4db6c2d4df6a3
         </table>
         <div>
             <router-link to="/car/create" v-if="isAdmin" tag="button">Add</router-link>

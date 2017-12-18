@@ -34,6 +34,18 @@ app.get(`${CAR_URL}/:carId`, (req, res) => {
         .catch(err => res.status(500).send(err.message))
 })
 
+
+app.delete(`${CAR_URL}/multi`, (req, res) => {
+    var carsIds = req.body.carIds
+    if (!carsIds) {
+        res.status(500).send('Missing CarID to delete')
+    }
+    CarService
+        .deleteCars(carsIds)
+        .then(_ => res.end())
+        .catch(err => res.status(500).send('Could not delete car'))
+})
+
 // app.delete(`${CAR_URL}/multi` , (req, res) => {
 //     console.log('req.body multi delete:', req.body)
 //     const cars = req.body;

@@ -32,10 +32,15 @@ function deleteCar(carId) {
     })
 }
 
-function deleteCars(cars) {
-    cars.forEach((carId) => {
-        deleteCar(carId)
-    });
+function deleteCars(carsIds) {
+    // cars.forEach((carId) => {
+        // deleteCar(carId)
+    // });
+    return getCars()
+        .then(cars => {
+            cars = cars.filter(car => !carsIds.includes(car.id));
+            return _saveCars(cars)
+        })
 }
 
 

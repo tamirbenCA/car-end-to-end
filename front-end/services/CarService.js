@@ -61,10 +61,13 @@ function deleteCar(carId) {
 }
 
 function deleteSelected(carsArray) {
-    let prms = carsArray.map(carId => {
-        return axios.delete(_getCarUrl(carId))
-    }) 
-    return Promise.all(prms)
+    // var prms = carsArray.map(carId => {
+        // return axios.delete(_getCarUrl(carId))
+    // }) 
+    // return Promise.all(prms)
+    var carsObj = {"carIds" : Array.from(carsArray)}
+    return axios.delete(`${CAR_URL}/multi`, {data: carsObj})
+        .then(({data}) => {})
 }
 
 function getCarById(carId) {
@@ -83,9 +86,6 @@ export default {
     deleteCar,
     emptyCar,
     getCarById,
-<<<<<<< HEAD
-    getLikedCars
-=======
+    getLikedCars,
     deleteSelected
->>>>>>> c49bf3233aeaa7688c47841b39c4db6c2d4df6a3
 }

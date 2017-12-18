@@ -14,14 +14,10 @@ export default {
                 <button v-if="user" @click="logOut">Log Out</button>
             </div>
             <span v-if="user">Hello {{user.name}}</span>
-<<<<<<< HEAD
-            <button v-if="user" @click="logOut">Log Out</button>
             <div v-if="user" > 
             <button @click="toggleLikes(user)"> Show my likes </button> 
             <show-likes :likes="likes"></show-likes>
         </div>
-=======
->>>>>>> c49bf3233aeaa7688c47841b39c4db6c2d4df6a3
         </section>
     
     `,
