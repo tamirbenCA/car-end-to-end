@@ -32,6 +32,16 @@ app.get(`${CAR_URL}/:carId`, (req, res) => {
         .catch(err => res.status(500).send(err.message))
 })
 
+
+
+app.delete(`${CAR_URL}/multi` , (req, res) => {
+    const cars = req.body;
+    CarService
+        .deleteCar(cars)
+        .then(_ => res.end())
+        .catch(err => res.status(500).send('Could not delete cars'))
+})
+
 app.delete(`${CAR_URL}/:carId`, (req, res) => {
     const carId = req.params.carId;
     if (!carId) {
@@ -68,7 +78,7 @@ const USER_URL = '/user';
 
 app.get(`${USER_URL}`, (req, res) => {
     //user is an object  - has an email & name
-    UserService.checkLogIn(user)
+    UserService.checkLogIn(req.user)
         .then(user => {
             res.json(true)
         })
@@ -78,20 +88,21 @@ app.get(`${USER_URL}`, (req, res) => {
 
 app.post(`${USER_URL}`, (req, res) => {
     UserService
-        .signup(user)
+        .signup(req.user)
         .then(user => res.json())
         .catch(err => res.status(500).send('Could not add user'))
 })
 
 
-app.put(`${CAR_URL}/:userId/toggle-like/:carId `, (req, res) => {
+app.put(`${USER_URL}/:userId/toggle-like/:carId `, (req, res) => {
     const carId = req.params.carId;
-    const car = req.body;
-    CarService
-        .updateCar(car)
-        .then(car => res.json(car))
+    const user = req.body;
+    UserService
+        .updateUser(user)
+        .then(user => res.json(user))
         .catch(err => res.status(500).send('Could not add car'))
 })
+
 
 
 
