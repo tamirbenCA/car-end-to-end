@@ -5,21 +5,26 @@ import CarService from '../services/CarService.js'
 export default {
     // mixins: [UserFeedbackMixin],
     template: `
-        <section>
-            <h1>Cars R Us</h1>
-            <ul>
-                <li v-for="car in cars">
-                    {{car}}
-                    <button @click="deleteCar(car.id)">x</button>
-                    <router-link :to="'/car/' + car.id">Details</router-link>
-                    <router-link :to="'/car/' + car.id + '/edit'">Edit</router-link>
-                </li>
-            </ul>
-            <router-link to="/car/create">Add</router-link>
+    <section>
+    <h1>Cars R Us</h1>
+        <table>
+            <tr>
+                <th>Car Model</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+            <tr v-for="car in cars">
+                <td>{{car.name}}</td>
+                <td>{{car.price}}</td>
+                <td><router-link :to="'/car/' + car.id">Details</router-link> </td>
             
-        </section>
-    
-    `,
+                <td> <button @click="deleteCar(car.id)">x</button>
+                                <router-link :to="'/car/' + car.id + '/edit'">Edit</router-link>
+            </td>
+        </tr>
+        </table>
+    <router-link to="/car/create">Add</router-link>
+</section>    `,
     data() {
         return {
             cars: [],
