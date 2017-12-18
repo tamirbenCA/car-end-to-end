@@ -1,12 +1,12 @@
-import EventBusService from '../services/EventBusService.js'
+    import EventBusService from '../services/EventBusService.js'
 
 export default {
     template: `
         <section>
-            <router-link to="/" exact>Home</router-link>
-            <router-link to="/" v-if="!user" @click="signUp">Sign Up</router-link>
-            <router-link to="/user/login" v-if="!user">Log In</router-link>
-            <a href v-if="user" @click="logOut">Log Out</a>
+            <router-link to="/" exact tag="button">Home</router-link>
+            <router-link to="/user/login" v-if="!user" tag="button">Log In</router-link>
+            <router-link to="/user/signup" v-if="!user" tag="button">Sign Up</router-link>
+            <button v-if="user" @click="logOut">Log Out</button>
         </section>
     
     `,
@@ -22,16 +22,9 @@ export default {
 
             },
     methods: {
-        signIn() {
-           console.log('sign in') 
-        },
-        signOut() {
-            console.log('sign out') 
+        logOut() {
+            EventBusService.$emit('userLoggedIn', false); 
             
         },
-        SignUp() {
-            console.log('sign up') 
-
-        }
     }
 }

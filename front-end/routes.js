@@ -2,6 +2,7 @@ import HomePage from './pages/HomePage.js'
 import CarDetailsPage from './pages/CarDetailsPage.js'
 import CarEditPage from './pages/CarEditPage.js'
 import LogIn from './cmps/LogIn.js'
+import SignUp from './cmps/SignUp.js'
 
 const routes = [
     {
@@ -24,6 +25,10 @@ const routes = [
     {
         path: '/user/login',
         component: LogIn
+    },
+    {
+        path: '/user/signup',
+        component: SignUp
     }
 ];
 
