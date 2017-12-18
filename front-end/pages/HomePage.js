@@ -1,9 +1,9 @@
 import EventBusService, { SHOW_MSG } from '../services/EventBusService.js'
 import CarService from '../services/CarService.js'
-// import UserFeedbackMixin from '../mixins/UserFeedbackMixin.js'
+import ShowLikes from '../cmps/ShowLikes.js'
+
 
 export default {
-    // mixins: [UserFeedbackMixin],
     template: `
     <section>
     <h1>Cars R Us</h1>
@@ -40,7 +40,6 @@ export default {
     created() {
         EventBusService.$on('userLoggedIn', res => {
             this.user = res;
-            
         })
         CarService.getCars()
             .then(cars => {
