@@ -1,8 +1,8 @@
 const FILE_NAME = 'users.json';
 import fs from 'fs';
-var loggedinUser = null; 
+var loggedinUser = null;
 
-function checkLogIn(userInfo) { 
+function checkLogIn(userInfo) {
     return new Promise((resolve, reject) => {
         var user = getUser(userInfo)
         resolve(user.name);
@@ -11,9 +11,9 @@ function checkLogIn(userInfo) {
         //     resolve({loggedinUser});
         // } 
         // else {
-            // reject(error: 'Email/Password not valid')
-            // });
-        
+        // reject(error: 'Email/Password not valid')
+        // });
+
     });
 }
 
@@ -77,15 +77,23 @@ function _saveCars(users) {
     });
 }
 
-function _getUserIdx(users, userId) {
-    return users.findIndex(user => user.id === userId)
+
+function _getUserIdx(userId) {
+    return getUsers().then(users => {
+        const user = users.find((user) => {
+            if (user.id === userId)
+                return user.favCarIds;
+            else throw new Error('User not Found');
+        });
+    })
 }
 
 export default {
     checkLogIn,
     getUsers,
     getUser,
-    signup
+    signup,
+    _getUserIdx
 
 }
 

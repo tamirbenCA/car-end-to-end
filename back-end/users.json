@@ -12,7 +12,7 @@
         "email": "ben@ben.com",
         "password": "ben123456",
         "isAdmin": "false",
-        "favCarIds":[]
+        "favCarIds":["rye_Z3WHfM","rkfd-2-SGf"]
     },
     {
         "id": 3,
@@ -20,6 +20,6 @@
         "email": "may@may.com",
         "password": "may123456",
         "isAdmin": "false",
-        "favCarIds":[]
+        "favCarIds":["HJU_Wh-HGM","H1Bu-2-BzM","H1w_WnbHGz"]
     }
 ]
