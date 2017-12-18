@@ -1,6 +1,6 @@
 // import colors from 'colors';
 import CarService from './services/CarService'
-
+import UserService from './services/UserService'
 import express from 'express'
 import bodyParser from 'body-parser'
 
@@ -64,6 +64,22 @@ app.get('/', (req, res) => res.send('Hello World!'))
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
 
+
+app.get(`${CAR_URL}`, (req, res) => {
+    //user is an object  - has an email & name
+    UserService.signin(user)
+        .then(user => {
+            res.json(user)
+        })
+        .catch(err => res.status(500).send(err.message))
+})
+
+app.post(CAR_URL, (req, res) => {
+    UserService
+        .signup(user)
+        .then(user => res.json(user))
+        .catch(err => res.status(500).send('Could not add car'))
+})
 
 
 
