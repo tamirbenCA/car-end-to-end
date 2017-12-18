@@ -4,14 +4,16 @@ var loggedinUser = null;
 
 function checkLogIn(userInfo) { 
     return new Promise((resolve, reject) => {
-        if (getUser(userInfo)) {
-            loggedinUser = true;
-            resolve({loggedinUser});
-        } else {
-            reject({
-                error: 'Email/Password not valid'
-            });
-        }
+        var user = getUser(userInfo)
+        resolve(user);
+        // if (getUser(userInfo)) {
+        //     loggedinUser = true;
+        //     resolve({loggedinUser});
+        // } 
+        // else {
+            // reject(error: 'Email/Password not valid')
+            // });
+        
     });
 }
 

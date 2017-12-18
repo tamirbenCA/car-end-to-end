@@ -24,12 +24,21 @@ function getById(carId) {
         else throw new Error('Car not Found');
     })
 }
+
 function deleteCar(carId) {
     return getCars().then(cars => {
         cars = cars.filter(car => car.id !== carId);
         return _saveCars(cars)
     })
 }
+
+function deleteCars(cars) {
+    cars.forEach((carId) => {
+        deleteCar(carId)
+    });
+}
+
+
 function addCar(car) {
     return getCars().then(cars => {
         car.id = shortid.generate();
