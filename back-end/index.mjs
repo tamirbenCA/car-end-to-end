@@ -79,8 +79,8 @@ app.listen(3000, () => console.log('Example app listening on port 3000!'))
 app.post(`${USER_URL}/login`, (req, res) => {
     //user is an object  - has an email & name
     UserService.checkLogIn(req.body)
-        .then(name => {
-            res.json(name)
+        .then(user => {
+            res.json(user)
         })
         .catch(err => res.status(500).send(err.message))
 })

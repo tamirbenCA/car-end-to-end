@@ -19,7 +19,7 @@ export default {
     },
     props:['likes'],
     created() {
-
+        console.log('im herererererere 22222')
             },
     methods: {
         goBack(){

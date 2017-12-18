@@ -1,25 +1,4 @@
-[
-    {
-        "id": 1,
-        "name": "admin",
-        "email": "admin@admin.com",
-        "password": "admin123456",
-        "isAdmin": "true"
-    },
-    {
-        "id": 2,
-        "name": "ben",
-        "email": "ben@ben.com",
-        "password": "ben123456",
-        "isAdmin": "false",
-        "favCarIds":["rye_Z3WHfM","rkfd-2-SGf"]
-    },
-    {
-        "id": 3,
-        "name": "may",
-        "email": "may@may.com",
-        "password": "may123456",
-        "isAdmin": "false",
-        "favCarIds":["HJU_Wh-HGM","H1Bu-2-BzM","H1w_WnbHGz"]
-    }
-]
+[{"id":1,"name":"admin","email":"admin","password":"admin","isAdmin":"true"},
+    {"id":2,"name":"ben","email":"ben@ben.com","password":"ben123456","isAdmin":"false","favCarIds":["H1Bu-2-BzM","rJ4_b2-BzM","B19ctMHMG"]},
+    {"id":3,"name":"may","email":"may@may.com","password":"may123456","isAdmin":"false","favCarIds":["H1Bu-2-BzM","rJ4_b2-BzM"]},
+    {"id":4,"name":"1","email":"1","password":"1","isAdmin":"false","favCarIds":[]}]

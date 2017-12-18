@@ -32,6 +32,7 @@ function getCars() {
 }
 
 function getLikedCars(userId) {
+    console.log(userId)
     return axios
         .get(CAR_URL+'/' + userId, userId)
         .then(res =>  res)
@@ -77,5 +78,6 @@ export default {
     saveCar,
     deleteCar,
     emptyCar,
-    getCarById
+    getCarById,
+    getLikedCars
 }

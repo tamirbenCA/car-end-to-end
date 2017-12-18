@@ -1,12 +1,13 @@
 import EventBusService, { SHOW_MSG } from '../services/EventBusService.js'
 import CarService from '../services/CarService.js'
-import ShowLikes from '../cmps/ShowLikes.js'
+import StorageService from '../services/StorageService.js'
 
 
 export default {
     template: `
     <section>
     <h1>Cars R Us</h1>
+
         <table>
             <tr>
                 <th>Car Model</th>
@@ -18,17 +19,13 @@ export default {
                 <td>{{car.price}}</td>
                 <td><router-link :to="'/car/' + car.id">Details</router-link> </td>
             
-                <td> <button @click="deleteCar(car.id)">x</button>
-                                <router-link :to="'/car/' + car.id + '/edit'">Edit</router-link>
-            </td>
-        </tr>
-        <div v-if="user" > 
-        <button @click="toggleLikes(user)"> Show my likes </button> 
-        </div>
-        <show-likes :likes=likes></show-likes>
-                </table>
-    <router-link to="/car/create">Add</router-link>
-</section>    `,
+                <td v-if="isAdmin"> <button @click="deleteCar(car.id)">x</button>
+                    <router-link :to="'/car/' + car.id + '/edit'">Edit</router-link>
+                </td>
+            </tr>
+        </table>
+        <router-link to="/car/create" v-if="isAdmin">Add</router-link>
+    </section>    `,
     data() {
         return {
             cars: [],
@@ -54,28 +51,27 @@ export default {
             })
     },
     methods: {
-        toggleLikes(user){
-            CarService.getLikedCars(user.id)
-            .then((res)=>{
-                this.likes = res;
-            })
-        },
+     
         deleteCar(carId) {
             CarService.deleteCar(carId)
-                .then(_ => {
-                    var userMsg = { txt: `Car ${carId} was succesfuly deleted`, type: 'success' }
-                    EventBusService.$emit(SHOW_MSG, userMsg)
-                    // TODO - show the updated list
-                })
-                .catch(err => {
-                    var userMsg = { txt: 'Car Delete Failed!', type: 'danger' }
-                    EventBusService.$emit(SHOW_MSG, userMsg)
-
-                })
-        },
+             .then(_ => {
+                var userMsg = {txt: `Car ${carId} was succesfuly deleted`, type: 'success' }
+                EventBusService.$emit(SHOW_MSG, userMsg)
+                // TODO - show the updated list
+             })
+             .catch(err => {
+                var userMsg = {txt: 'Car Delete Failed!', type: 'danger' }
+                EventBusService.$emit(SHOW_MSG, userMsg)
+                
+            })
+        }     
     },
-    compotents:{
-        ShowLikes
-    }
+    computed: {
+        isAdmin() {
+            return StorageService.loadFromStorage('admin')
+        }
+    },
+
+    
 
 }
