@@ -34,14 +34,14 @@ app.get(`${CAR_URL}/:carId`, (req, res) => {
         .catch(err => res.status(500).send(err.message))
 })
 
-app.delete(`${CAR_URL}/multi` , (req, res) => {
-    console.log('req.body multi delete:', req.body)
-    const cars = req.body;
-    CarService
-        .deleteCars(cars)
-        .then(_ => res.end())
-        .catch(err => res.status(500).send('Could not delete cars'))
-})
+// app.delete(`${CAR_URL}/multi` , (req, res) => {
+//     console.log('req.body multi delete:', req.body)
+//     const cars = req.body;
+//     CarService
+//         .deleteCars(cars)
+//         .then(_ => res.end())
+//         .catch(err => res.status(500).send('Could not delete cars'))
+// })
 
 app.delete(`${CAR_URL}/:carId`, (req, res) => {
     console.log('req.body single delete', req.params.carId)
