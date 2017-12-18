@@ -38,7 +38,6 @@ function getUsers() {
 
 function getUser(userInfo) {
     return getUsers().then(users => {
-        console.log('row 38:', users)
         let validUser = users.find(user => {
             if (user.email === userInfo.email && user.password === userInfo.password) {
                 return user;
@@ -53,9 +52,14 @@ function getUser(userInfo) {
 function signup(user) {
     return new Promise(resolve => {
         return getUsers().then(users => {
+            user.id = _getNextId(users);
+            user.isAdmin = false;
+            user.favCarIds = [];
             users.push(user)
+            _saveUsers(users).then(_ => {
+                resolve('User added successfuly');
+            })
         })
-        resolve('User added successfuly');
     });
 }
 
@@ -73,7 +77,7 @@ function updateUser(user) {
     })
 }
 
-function _saveCars(users) {
+function _saveUsers(users) {
     return new Promise((resolve, reject) => {
         var strUsers = JSON.stringify(users)
         fs.writeFile(FILE_NAME, strUsers, 'utf8', (err, data) => {
@@ -81,6 +85,13 @@ function _saveCars(users) {
             else resolve()
         })
     });
+}
+
+function _getNextId(users) {
+    var maxId = users.reduce((acc, user) => {
+        return (user.id > acc) ? user.id : acc
+    }, 0)
+    return maxId + 1;
 }
 
 function _getUserIdx(users, userId) {

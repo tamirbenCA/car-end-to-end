@@ -80,7 +80,6 @@ app.post(`${USER_URL}/login`, (req, res) => {
     //user is an object  - has an email & name
     UserService.checkLogIn(req.body)
         .then(name => {
-            console.log('index mjs, login:', name)
             res.json(name)
         })
         .catch(err => res.status(500).send(err.message))
