@@ -4,11 +4,13 @@
 export default {
     template: `
         <section>
-            <router-link to="/" exact tag="button">Home</router-link>
-            <router-link to="/user/login" v-if="!user" tag="button">Log In</router-link>
-            <router-link to="/user/signup" v-if="!user" tag="button">Sign Up</router-link>
+            <div>
+                <router-link to="/" exact tag="button">Home</router-link>
+                <router-link to="/user/login" v-if="!user" tag="button">Log In</router-link>
+                <router-link to="/user/signup" v-if="!user" tag="button">Sign Up</router-link>
+                <button v-if="user" @click="logOut">Log Out</button>
+            </div>
             <span v-if="user">Hello {{user.name}}</span>
-            <button v-if="user" @click="logOut">Log Out</button>
         </section>
     
     `,

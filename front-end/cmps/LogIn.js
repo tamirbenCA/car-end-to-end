@@ -4,11 +4,11 @@ import StorageService from '../services/StorageService.js'
 
 export default {
     template: `
-        <section>
+        <form onsubmit.prevent>
             <input type="text" v-model="user.email" placeholder="email">
             <input type="text" v-model="user.password" placeholder="password">
             <button @click="submit">Submit</button>
-        </section>
+        </form>
     
     `,
     data() {
