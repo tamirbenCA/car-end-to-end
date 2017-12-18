@@ -5,6 +5,7 @@ Vue.use(VueRouter);
 const myRouter = new VueRouter({routes : myRoutes})
 
 import UserMsg from './cmps/UserMsg.js'
+import NavBar from './cmps/NavBar.js'
 
 
 new Vue({
@@ -13,7 +14,7 @@ new Vue({
                 <h1>My App</h1> 
                 <user-msg></user-msg>
                 <nav>
-                    <router-link to="/" exact>Home</router-link>
+                    <nav-bar></nav-bar>
                 </nav>
                 <router-view></router-view>
                 <footer>cofferights 2018</footer>            
@@ -23,7 +24,8 @@ new Vue({
         console.log('Vue App was created!!!');
     },
     components: {
-        UserMsg
+        UserMsg,
+        NavBar
     },
     router: myRouter,
 }).$mount('#app')
