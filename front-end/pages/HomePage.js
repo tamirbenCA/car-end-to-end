@@ -66,7 +66,7 @@ export default {
              .then(_ => {
                 var userMsg = {txt: `Car ${carId} was succesfuly deleted`, type: 'success' }
                 EventBusService.$emit(SHOW_MSG, userMsg)
-                // TODO - show the updated list
+                this.cars = this.cars.filter(car => carId !== car.id)
              })
              .catch(err => {
                 var userMsg = {txt: 'Car Delete Failed!', type: 'danger' }
@@ -81,6 +81,7 @@ export default {
                 .then(_ => {
                     var userMsg = {txt: `${multiSelected.length} cars were succesfuly deleted`, type: 'success' }
                     EventBusService.$emit(SHOW_MSG, userMsg)
+                    this.cars = this.cars.filter(car => !multiSelected.includes(car.id))
                 })
         },
         getCheckboxesValues(){
